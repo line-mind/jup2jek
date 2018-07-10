@@ -40,7 +40,16 @@ time you add additional notebooks, you will need to add this command again.
 .. code::
 
 
-   python -m jup2jek
+   jup2jek
+
+
+If you have an configuration file with a different name or located in a
+different directory than the root, pass the file with the command:
+
+.. code::
+
+
+   jup2jek dir/to/a/different/options.ini
 
 
 Notebooks should be named in the same format as typical Jekyll posts, i.e.
