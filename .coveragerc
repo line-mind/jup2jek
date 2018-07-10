@@ -1,4 +1,5 @@
 [run]
+source = jup2jek
 omit =
     setup.py
-    jup2jek/tests/example.py
+    /tests/example.py
