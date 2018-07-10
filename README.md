@@ -34,7 +34,7 @@ assets = assets/jupyter
 From your root directory, run the below command to convert notebooks.
 
 ```
-python -m jup2jek
+jup2jek
 ```
 
 The method performs the following actions:

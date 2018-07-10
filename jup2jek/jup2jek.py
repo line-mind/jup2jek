@@ -127,8 +127,8 @@ class Jup2Jek():
         """
         Updates the asset paths within the specified markdown file to that
         of the specified relative asset path. The final path reads as:
-        {{ site.url }}/[relative assets path]/[notebook filename]_files.
-        For example: {{ site.url }}/[assets/jupyter/category1]/[example4]_files
+        `{{ site.url }}/[relative assets path]/[notebook filename]_files`.
+        For example: `{{ site.url }}/[assets/jupyter/category1]/[example4]_files`
         (brackets included for emphasis only).
 
         Parameters:
