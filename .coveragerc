@@ -2,4 +2,4 @@
 source = jup2jek
 omit =
     setup.py
-    /tests/example.py
+    */tests/example.py
