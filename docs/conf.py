@@ -25,7 +25,7 @@ if ROOT_PATH not in sys.path:
 
 # -- Project information -----------------------------------------------------
 
-project = 'CivPy'
+project = 'Jup2Jek'
 copyright = '2018, Matt Pewsey'
 author = 'Matt Pewsey'
 
@@ -118,7 +118,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'civpydoc'
+htmlhelp_basename = 'jup2jekdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -147,7 +147,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'civpy.tex', 'CivPy Documentation',
+    (master_doc, 'jup2jek.tex', 'Jup2Jek Documentation',
      'Matt Pewsey', 'manual'),
 ]
 
@@ -157,7 +157,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'civpy', 'CivPy Documentation',
+    (master_doc, 'jup2jek', 'Jup2Jek Documentation',
      [author], 1)
 ]
 
@@ -168,8 +168,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'civpy', 'CivPy Documentation',
-     author, 'civpy', 'Civil engineering algorithms and design tools.',
+    (master_doc, 'jup2jek', 'Jup2Jek Documentation',
+     author, 'jup2jek', '',
      ''),
 ]
 

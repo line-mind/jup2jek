@@ -1,5 +1,8 @@
 # Jup2Jek
 
+[![Build Status](https://travis-ci.com/line-mind/jup2jek.svg?branch=master)](https://travis-ci.com/line-mind/jup2jek)
+[![Documentation Status](//readthedocs.org/projects/jup2jek/badge/?version=latest)](https://jup2jek.readthedocs.io/en/latest/?badge=latest
+
 The Jup2Jek package is a tool for converting Jupyter notebooks to
 markdown for use as posts on Jekyll websites, such those hosted using GitHub
 Pages.
