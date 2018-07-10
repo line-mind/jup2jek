@@ -5,8 +5,8 @@ from .jup2jek import Jup2Jek
 if __name__ == '__main__':
     root = os.getcwd()
 
-    if sys.argv:
-        options = sys.argv[0]
+    if len(sys.argv) > 1:
+        options = sys.argv[1]
     else:
         options = None
 

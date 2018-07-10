@@ -8,7 +8,7 @@ sp.plot('cos(x)')
 ```
 
 
-![png]({{ site.url }}assets/jupyter/assets/jupyter/category1/example4_files/example4_0_0.png)
+![png]({{ site.url }}assets/jupyter/category1/example4_files/example4_0_0.png)
 
 
 
