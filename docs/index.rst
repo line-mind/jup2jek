@@ -14,7 +14,7 @@ To use the package, first install it via pip:
 .. code::
 
 
-   pip install jup2jek
+   pip install git+https://github.com/line-mind/jup2jek#egg=jup2jek
 
 
 Next, create a configuration file `jup2jek.ini`, with the following sections
