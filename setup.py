@@ -1,3 +1,5 @@
+import os
+from glob import glob
 from setuptools import setup, find_packages
 
 with open('README.md', 'r') as fh:
@@ -11,6 +13,7 @@ setup(name = 'jup2jek',
       url = 'https://github.com/line-mind/jup2jek',
       license = '',
       packages = find_packages(),
+      scripts = glob(os.path.join('scripts', '*')),
       include_package_data = True,
       install_requires = [],
       dependency_links = [],

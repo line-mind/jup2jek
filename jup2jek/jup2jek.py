@@ -39,7 +39,7 @@ class Jup2Jek():
         self.root = root
         if options == None:
             options = os.path.join(self.root, 'jup2jek.ini')
-        elif os.path.exists(options):
+        elif not os.path.exists(options):
             options = os.path.join(self.root, options)
         self.load_options(options)
 
@@ -80,7 +80,7 @@ class Jup2Jek():
             self.options = {}
             self.options.update(config['JUP2JEK'])
         else:
-            raise Exception('Configuration file {!r} does not exist.'.format(path))
+            raise Exception('Configuration file {} does not exist.'.format(path))
 
     def posts_path(self):
         """Returns the posts path."""
