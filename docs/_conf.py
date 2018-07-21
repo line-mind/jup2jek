@@ -18,49 +18,22 @@
 
 import os
 import sys
-from configparser import ConfigParser
-from recommonmark.transform import AutoStructify
-from recommonmark.parser import CommonMarkParser
-from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-root = os.path.abspath(os.path.join('..'))
-sys.path.insert(0, root)
-
-# Load metadata from setup.cfg
-metadata_file = os.path.join(root, 'setup.cfg')
-metadata = ConfigParser()
-metadata.read(metadata_file)
-metadata = metadata['metadata']
-
-with open(os.path.join(root, 'README.md'), 'rt') as fh:
-    metadata['long_description'] = fh.read()
-
-# Render index.md with metadata
-def write_index():
-    path = os.path.join(root, 'docs', '_templates')
-    env = Environment(loader = FileSystemLoader(path),
-                      undefined = StrictUndefined)
-    template = env.get_template('index.md')
-    s = template.render(**metadata)
-
-    with open(os.path.join(root, 'docs', 'index.md'), 'wt') as fh:
-        fh.truncate()
-        fh.write(s)
-
-write_index()
+ROOT_PATH = os.path.abspath(os.path.join('..'))
+if ROOT_PATH not in sys.path:
+    sys.path.insert(0, ROOT_PATH)
 
 # -- Project information -----------------------------------------------------
 
-project = metadata['project']
-copyright = metadata['copyright']
-author = metadata['author']
+project = 'Jup2Jek'
+copyright = '2018, Matt Pewsey'
+author = 'Matt Pewsey'
 
 # The short X.Y version
-version = metadata['version']
+version = ''
 # The full version, including alpha/beta/rc tags
-release = metadata['version']
+release = ''
 
-github_doc_root = 'https://github.com/line-mind/{}/tree/master/'.format(metadata['name'])
 
 # -- General configuration ---------------------------------------------------
 
@@ -78,11 +51,10 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
-    #'sphinx.ext.linkcode',
-    'numpydoc',
     #'sphinx.ext.imgmath',
-    'sphinx.ext.viewcode',
+    #'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx.ext.viewcode',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -91,12 +63,8 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-source_suffix = ['.rst', '.md']
-#source_suffix = '.rst'
-
-source_parsers = {
-   '.md' : CommonMarkParser
-}
+# source_suffix = ['.rst', '.md']
+source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
@@ -111,7 +79,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path .
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'scipy-sphinx-theme/*']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -122,30 +90,8 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-themedir = os.path.join(os.path.dirname(__file__), 'scipy-sphinx-theme', '_theme')
-if not os.path.isdir(themedir):
-    raise RuntimeError('Get the scipy-sphinx-theme first, '
-                       'via git submodule init && git submodule update')
-
-
-html_theme = 'scipy'
-html_theme_path = [themedir]
-
-# numpydoc settings
-numpydoc_show_class_members = False
-numpydoc_show_inherited_class_members = False
-class_members_toctree = False
-
-html_theme_options = {
-    "edit_link": False,
-    "sidebar": "left",
-    "scipy_org_logo": False,
-    "rootlinks": []
-}
-html_sidebars = {}
-
-html_title = "%s v%s Manual" % (project, version)
-html_last_updated_fmt = '%b %d, %Y'
+html_theme = 'sphinx_rtd_theme'
+html_theme_path = ['_themes']
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -172,7 +118,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = '{}_doc'.format(metadata['name'])
+htmlhelp_basename = 'jup2jekdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -201,8 +147,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, '{}.tex'.format(metadata['name']), '{} Documentation'.format(metadata['project']),
-     author, 'manual'),
+    (master_doc, 'jup2jek.tex', 'Jup2Jek Documentation',
+     'Matt Pewsey', 'manual'),
 ]
 
 
@@ -211,7 +157,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, metadata['name'], '{} Documentation'.format(metadata['project']),
+    (master_doc, 'jup2jek', 'Jup2Jek Documentation',
      [author], 1)
 ]
 
@@ -222,9 +168,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, metadata['name'], '{} Documentation'.format(metadata['project']),
-     author, metadata['name'], metadata['description'],
-     'Miscellaneous'),
+    (master_doc, 'jup2jek', 'Jup2Jek Documentation',
+     author, 'jup2jek', '',
+     ''),
 ]
 
 
@@ -239,11 +185,3 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
-
-# AutoStructify setup
-def setup(app):
-    app.add_config_value('recommonmark_config', {
-            'url_resolver': lambda url: github_doc_root + url,
-            'auto_toc_tree_section': 'Table of Contents',
-            }, True)
-    app.add_transform(AutoStructify)

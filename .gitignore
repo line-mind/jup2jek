@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+jup2jek/tests/_posts/*.md
+jup2jek/tests/_posts/category1/*.md
+jup2jek/tests/assets
+
 *.pytest_cache
 
 # Distribution / packaging

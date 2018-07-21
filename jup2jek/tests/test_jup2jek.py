@@ -48,7 +48,7 @@ def test_notebooks():
 
 def test_create_assets_path():
     j = Jup2Jek_init()
-    j.create_assets_path()
+    j._create_assets_path()
     p = root_dir()
     p = os.path.join(p, 'assets/jupyter')
     assert os.path.exists(p) == True
@@ -56,8 +56,8 @@ def test_create_assets_path():
 
 def test_remove_assets_path():
     j = Jup2Jek_init()
-    j.create_assets_path()
-    j.remove_assets_path()
+    j._create_assets_path()
+    j._remove_assets_path()
     p = root_dir()
     p = os.path.join(p, 'assets/jupyter')
     assert os.path.exists(p) == False

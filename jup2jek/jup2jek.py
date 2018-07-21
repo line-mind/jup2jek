@@ -1,7 +1,12 @@
 """
-===============================================
-Developer Documenation (:mod:`jup2jek.jup2jek`)
-===============================================
+Summary
+-------
+Contains a class for converting Jupyter notebooks in a Jekyll posts folder
+to markdown for inclusion in Jekyll websites.
+
+Classes
+-------
+
 """
 
 import os
@@ -16,24 +21,33 @@ class Jup2Jek():
     A class for converting Jupyter notebooks to markdowns for use on Jekyll
     websites.
 
-    Parameters:
-        root : str
-            The path to the website root directory.
-        options : dict
-            The path to the configuration file. If None, then the default
-            configuration file `root/jup2jek.ini` will be used.
+    Parameters
+    ----------
+    root : str
+        The path to the website root directory.
+    options : dict
+        The path to the configuration file. If None, then the default
+        configuration file `root/jup2jek.ini` will be used.
 
-    Configuration Parameters:
-        posts
-            The relative path to the posts directory from the website root.
-            This is `_posts` for default Jekyll site configurations.
-        assets
-            The relative path to the assets folder where generated notebook
-            assets will be stored. This is relative to the website root.
-            WARNING: This folder will be cleared each time `convert_notebooks()`
-            is called. Therefore, the folder should be separate from those
-            used for other website assets. Otherwise those assets will be
-            deleted.
+    Examples
+    --------
+    The contents of an example configuration file are below:
+
+    >>> [JUP2JEK]
+    >>> posts = _posts
+    >>> assets = assets/jupyter
+
+    posts
+        The relative path to the posts directory from the website root.
+        This is `_posts` for default Jekyll site configurations.
+    assets
+        The relative path to the assets folder where generated notebook
+        assets will be stored. This is relative to the website root.
+        WARNING: This folder will be cleared each time `convert_notebooks()`
+        is called. Therefore, the folder should be separate from those
+        used for other website assets. Otherwise those assets will be
+        deleted.
+
     """
     def __init__(self, root, options = None):
         self.root = root
@@ -48,11 +62,12 @@ class Jup2Jek():
         """
         Writes a configuration file with the default options.
 
-        Parameters:
-            path : str
-                Directory for writing the configuration file. The file name
-                should not be included and will be appended as part of the
-                method.
+        Parameters
+        ----------
+        path : str
+            Directory for writing the configuration file. The file name
+            should not be included and will be appended as part of the
+            method.
         """
         config = ConfigParser()
         config['JUP2JEK'] = {
@@ -70,9 +85,10 @@ class Jup2Jek():
         """
         Loads the options from the specified configuration file.
 
-        Paramters:
-            path : str
-                Configuration file path.
+        Parameters
+        ----------
+        path : str
+            Configuration file path.
         """
         if os.path.exists(path):
             config = ConfigParser()
@@ -95,9 +111,10 @@ class Jup2Jek():
         Converts the notebook at the specified path to markdown via the
         `jupyter nbconvert [notebook path] --to markdown` command.
 
-        Paramters:
-            path : str
-                Path to the jupyter notebook.
+        Parameters
+        ----------
+        path : str
+            Path to the jupyter notebook.
         """
         command = 'jupyter nbconvert {} --to markdown'.format(path)
         check_output(command, shell = True)
@@ -111,19 +128,19 @@ class Jup2Jek():
                 notebooks.extend(glob(os.path.join(folder, '*.ipynb')))
         return notebooks
 
-    def create_assets_path(self):
+    def _create_assets_path(self):
         """Creates the new assets path."""
         p = self.assets_path()
         if not os.path.exists(p):
             os.makedirs(p)
 
-    def remove_assets_path(self):
+    def _remove_assets_path(self):
         """Removes the jupyter assets path."""
         p = self.assets_path()
         if os.path.exists(p):
             shutil.rmtree(p)
 
-    def update_markdown_paths(self, md_path, rel_assets_path):
+    def _update_markdown_paths(self, md_path, rel_assets_path):
         """
         Updates the asset paths within the specified markdown file to that
         of the specified relative asset path. The final path reads as:
@@ -131,13 +148,14 @@ class Jup2Jek():
         For example: `{{ site.url }}/[assets/jupyter/category1]/[example4]_files`
         (brackets included for emphasis only).
 
-        Parameters:
-            md_path : str
-                The path to the markdown file for which asset reference
-                paths will be replaced.
-            rel_assets_path : str
-                The relative path to the new assets folder from the website
-                root. See the above example path declaration.
+        Parameters
+        ----------
+        md_path : str
+            The path to the markdown file for which asset reference
+            paths will be replaced.
+        rel_assets_path : str
+            The relative path to the new assets folder from the website
+            root. See the above example path declaration.
         """
         p = '{{{{ site.url }}}}{}/'.format(rel_assets_path)
 
@@ -155,19 +173,19 @@ class Jup2Jek():
         in the class options to markdown for use on Jekyll websites.
         The convert process operates as follows:
 
-        1. All notebooks contained in the designated posts folder are found
-           and converted to markdown using the jupyter nbconvert command.
-        2. If the nbconvert command generates an assets folder, the assets
-           are moved to the designated site assets folder at the same relative
-           path.
-        3. Asset paths referenced within the markdown files are updated to
-           the website path.
+            1. All notebooks contained in the designated posts folder are found
+               and converted to markdown using the jupyter nbconvert command.
+            2. If the nbconvert command generates an assets folder, the assets
+               are moved to the designated site assets folder at the same relative
+               path.
+            3. Asset paths referenced within the markdown files are updated to
+               the website path.
         """
         notebooks = self.notebooks()
         assets_path = self.assets_path()
         posts_path = self.posts_path()
-        self.remove_assets_path()
-        self.create_assets_path()
+        self._remove_assets_path()
+        self._create_assets_path()
 
         for x in notebooks:
             self.convert(x)
@@ -182,4 +200,4 @@ class Jup2Jek():
                 p = os.path.relpath(os.path.dirname(a1), posts_path)
                 p = os.path.join(assets_path, p)
                 p = os.path.relpath(p, self.root)
-                self.update_markdown_paths(m, p)
+                self._update_markdown_paths(m, p)

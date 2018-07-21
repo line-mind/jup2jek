@@ -72,3 +72,11 @@ categories: jekyll
 date: 2018-03-28
 ---
 ```
+
+
+# Indices and tables
+
+```eval_rst
+* :ref:`genindex`
+* :ref:`modindex`
+```
