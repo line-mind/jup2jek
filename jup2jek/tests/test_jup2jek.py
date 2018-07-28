@@ -2,6 +2,7 @@ import os
 import pytest
 from subprocess import check_output
 from ..jup2jek import Jup2Jek
+from ..scripts import Jup2JekArgParser
 
 
 def root_dir():
@@ -81,5 +82,12 @@ def test_script():
 def test_script_options():
     p = root_dir()
     options = os.path.join(p, 'jup2jek.ini')
-    command = 'jup2jek {}'.format(options)
+    command = 'jup2jek --options {}'.format(options)
     check_output(command, cwd = p, shell = True)
+
+
+def test_arg_parser():
+    command = ['--options', 'jup2jek.ini']
+    p = Jup2JekArgParser()
+    a = p.parse_args(command)
+    assert a.options == 'jup2jek.ini'
