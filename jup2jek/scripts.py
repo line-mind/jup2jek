@@ -12,6 +12,7 @@ Classes
 
 """
 
+import sys
 from argparse import ArgumentParser
 
 class Jup2JekArgParser(ArgumentParser):
@@ -35,4 +36,5 @@ class Jup2JekArgParser(ArgumentParser):
         s = '\n\t'.join(s.split('\n'))
         return Jup2JekArgParser.__doc__ + '\n\t' + s + '\n\n'
 
-Jup2JekArgParser.__doc__ = Jup2JekArgParser._doc_string()
+if sys.version_info[0] >=3:
+    Jup2JekArgParser.__doc__ = Jup2JekArgParser._doc_string()
