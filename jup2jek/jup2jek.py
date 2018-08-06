@@ -157,7 +157,7 @@ class Jup2Jek():
             The relative path to the new assets folder from the website
             root. See the above example path declaration.
         """
-        p = '{{{{ site.url }}}}{}/'.format(rel_assets_path)
+        p = '{{{{ site.url }}}}/{}/'.format(rel_assets_path)
 
         with open(md_path, 'rt') as file:
             reader = file.read()
