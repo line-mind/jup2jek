@@ -4,11 +4,14 @@
 [![Documentation Status](https://readthedocs.org/projects/jup2jek/badge/?version=latest)](https://jup2jek.readthedocs.io/en/latest/?badge=latest)
 [![codecov](https://codecov.io/gh/line-mind/jup2jek/branch/master/graph/badge.svg)](https://codecov.io/gh/line-mind/jup2jek)
 
+<!--
+
 ## Table of Contents
 
 * [Jup2Jek](jup2jek.rst)
 * [Scripts](scripts.rst)
 
+-->
 
 ## About
 
