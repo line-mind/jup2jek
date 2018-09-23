@@ -59,7 +59,7 @@ The method performs the following actions:
 3. Asset paths referenced within the markdown files are updated to
    the website path.
 
-Each time you add additional notebooks, you will need to add this command again.
+Each time you add additional notebooks, you will need to run this command again.
 
 Notebooks should be named in the same format as typical Jekyll posts, i.e.
 YYYY-MM-DD-post.ipynb. In addition, the first cell of the Jupyter notebook
