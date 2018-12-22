@@ -1,19 +1,10 @@
-"""
-Summary
--------
-Contains a class for converting Jupyter notebooks in a Jekyll posts folder
-to markdown for inclusion in Jekyll websites.
-
-Classes
--------
-
-"""
-
 import os
 import shutil
 from glob import glob
 from subprocess import check_output
 from configparser import ConfigParser
+
+__all__ = ['Jup2Jek']
 
 
 class Jup2Jek():
@@ -43,18 +34,23 @@ class Jup2Jek():
     assets
         The relative path to the assets folder where generated notebook
         assets will be stored. This is relative to the website root.
-        WARNING: This folder will be cleared each time `convert_notebooks()`
-        is called. Therefore, the folder should be separate from those
-        used for other website assets. Otherwise those assets will be
-        deleted.
+
+        .. warning::
+            This folder will be cleared each time `convert_notebooks()`
+            is called. Therefore, the folder should be separate from those
+            used for other website assets. Otherwise those assets will be
+            deleted.
 
     """
-    def __init__(self, root, options = None):
+    def __init__(self, root, options=None):
         self.root = root
+
         if options == None:
             options = os.path.join(self.root, 'jup2jek.ini')
+
         elif not os.path.exists(options):
             options = os.path.join(self.root, options)
+
         self.load_options(options)
 
     @staticmethod
@@ -70,10 +66,10 @@ class Jup2Jek():
             method.
         """
         config = ConfigParser()
-        config['JUP2JEK'] = {
-            'posts' : '_posts',
-            'assets' : 'assets/jupyter'
-        }
+        config['JUP2JEK'] = dict(
+            posts='_posts',
+            assets='assets/jupyter'
+        )
 
         p = os.path.join(path, 'jup2jek.ini')
 
@@ -96,7 +92,7 @@ class Jup2Jek():
             self.options = {}
             self.options.update(config['JUP2JEK'])
         else:
-            raise Exception('Configuration file {} does not exist.'.format(path))
+            raise ValueError('Configuration file {} does not exist.'.format(path))
 
     def posts_path(self):
         """Returns the posts path."""
@@ -117,26 +113,30 @@ class Jup2Jek():
             Path to the jupyter notebook.
         """
         command = 'jupyter nbconvert {} --to markdown'.format(path)
-        check_output(command, shell = True)
+        check_output(command, shell=True)
 
     def notebooks(self):
         """Returns a list of notebook paths to be converted."""
         posts = self.posts_path()
         notebooks = []
+
         for folder, _, _ in os.walk(posts):
             if '.ipynb_checkpoints' not in folder:
                 notebooks.extend(glob(os.path.join(folder, '*.ipynb')))
+
         return notebooks
 
     def _create_assets_path(self):
         """Creates the new assets path."""
         p = self.assets_path()
+
         if not os.path.exists(p):
             os.makedirs(p)
 
     def _remove_assets_path(self):
         """Removes the jupyter assets path."""
         p = self.assets_path()
+
         if os.path.exists(p):
             shutil.rmtree(p)
 
@@ -190,6 +190,7 @@ class Jup2Jek():
         for x in notebooks:
             self.convert(x)
             a1 = x[:-6] + '_files'
+
             if os.path.exists(a1):
                 # Move assets from posts to assets
                 f = os.path.relpath(a1, posts_path)
