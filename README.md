@@ -1,17 +1,9 @@
 # Jup2Jek
 
-[![Build Status](https://travis-ci.com/line-mind/jup2jek.svg?branch=master)](https://travis-ci.com/line-mind/jup2jek)
+[![Build Status](https://travis-ci.com/mpewsey/jup2jek.svg?branch=master)](https://travis-ci.com/mpewsey/jup2jek)
 [![Documentation Status](https://readthedocs.org/projects/jup2jek/badge/?version=latest)](https://jup2jek.readthedocs.io/en/latest/?badge=latest)
-[![codecov](https://codecov.io/gh/line-mind/jup2jek/branch/master/graph/badge.svg)](https://codecov.io/gh/line-mind/jup2jek)
+[![codecov](https://codecov.io/gh/mpewsey/jup2jek/branch/master/graph/badge.svg)](https://codecov.io/gh/mpewsey/jup2jek)
 
-<!--
-
-## Table of Contents
-
-* [Jup2Jek](jup2jek.rst)
-* [Scripts](scripts.rst)
-
--->
 
 ## About
 
@@ -25,7 +17,7 @@ Pages.
 To use the package, first install it via pip:
 
 ```
-pip install git+https://github.com/line-mind/jup2jek#egg=jup2jek
+pip install git+https://github.com/mpewsey/jup2jek#egg=jup2jek
 ```
 
 Next, create a configuration file `jup2jek.ini`, with the following sections

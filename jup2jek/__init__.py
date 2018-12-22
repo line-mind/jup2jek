@@ -3,9 +3,16 @@
 Jup2Jek (:mod:`jup2jek`)
 ========================
 
-.. automodule:: jup2jek.jup2jek
-   :members:
+Classes
+=======
+The following classes are used for notebook conversion and script parsing:
 
+.. autosummary::
+    :toctree: generated/
+
+    Jup2Jek
+    Jup2JekArgParser
 """
 
-from .jup2jek import Jup2Jek
+from .jup2jek import *
+from .scripts import *
