@@ -114,6 +114,15 @@ class Jup2Jek():
         """
         command = 'jupyter nbconvert {} --to markdown'.format(path)
         check_output(command, shell=True)
+        path = path[-6] + '.md'
+
+        with open(path, 'rt') as fh:
+            data = fh.read()
+            data = data.replace('<IPython.core.display.Javascript object>', '')
+
+        with open(path, 'wt') as fh:
+            fh.truncate()
+            fh.write(data)
 
     def notebooks(self):
         """Returns a list of notebook paths to be converted."""
@@ -162,7 +171,6 @@ class Jup2Jek():
         with open(md_path, 'rt') as fh:
             data = fh.read()
             data = data.replace('![png](', '![png]({}'.format(p))
-            data = data.replace('<IPython.core.display.Javascript object>', '')
 
         with open(md_path, 'wt') as fh:
             fh.truncate()
