@@ -114,7 +114,7 @@ class Jup2Jek():
         """
         command = 'jupyter nbconvert {} --to markdown'.format(path)
         check_output(command, shell=True)
-        path = path[-6] + '.md'
+        path = path[:-6] + '.md'
 
         with open(path, 'rt') as fh:
             data = fh.read()
