@@ -73,9 +73,9 @@ class Jup2Jek():
 
         p = os.path.join(path, 'jup2jek.ini')
 
-        with open(p, 'wt') as file:
-            file.truncate()
-            config.write(file)
+        with open(p, 'wt') as fh:
+            fh.truncate()
+            config.write(fh)
 
     def load_options(self, path):
         """
@@ -159,13 +159,14 @@ class Jup2Jek():
         """
         p = '{{{{ site.url }}}}/{}/'.format(rel_assets_path)
 
-        with open(md_path, 'rt') as file:
-            reader = file.read()
-            data = reader.replace('![png](', '![png]({}'.format(p))
+        with open(md_path, 'rt') as fh:
+            data = fh.read()
+            data = data.replace('![png](', '![png]({}'.format(p))
+            data = data.replace('<IPython.core.display.Javascript object>', '')
 
-        with open(md_path, 'wt') as file:
-            file.truncate()
-            file.write(data)
+        with open(md_path, 'wt') as fh:
+            fh.truncate()
+            fh.write(data)
 
     def convert_notebooks(self):
         """
